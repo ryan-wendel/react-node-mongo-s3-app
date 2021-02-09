@@ -1,0 +1,11 @@
+POST /newFileType HTTP/1.1
+Host: 192.168.0.160
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+
+{ "type": "text", "text": "Text", "help": "Text files must be in TXT format.", "extensions": [ ".txt" ], "mimetypes": [ "text/plain" ], "bucket":"bar.foobarbbq.com", "path":"files/text" }

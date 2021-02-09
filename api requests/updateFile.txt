@@ -1,0 +1,11 @@
+PUT /updateFile HTTP/1.1
+Host: 192.168.0.160
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/json; charset=utf-8
+Connection: close
+Content-Length: 89
+
+{ "id":"6020576a996ab7c1c056cec2", "description":"this is the new description, yo!" }
