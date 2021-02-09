@@ -2,7 +2,7 @@
 
 A simple web application that utilizes React, Node, and MongoDB that interacts with AWS S3 to store and create pre-signed URLs for uploaded objects. A simple proof-of-concept I worked up to introduce myself to the featured technologies.
 
-The "api" directory contains the back-end API that interacts with MongoDB and S3 to store and retrieve objects. The "ui" directory contains a React application that makes calls to the back-end to facilitate interactions with Mongo and S3.
+The "nodeapi" directory contains the back-end API that interacts with MongoDB and S3 to store and retrieve objects. The "reactui" directory contains a React application that makes calls to the back-end to facilitate interactions with Mongo and S3.
 
 This repo accompanies a blog post featured on my website.
 
