@@ -40,7 +40,11 @@ class App extends Component {
             this.setState({ fileTypeInfo: data });
             this.setState({ fileTypeHelp: data[this.state.fileTypeSelectOptionsValue].help });
         }).catch(response => {
-            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>})
+            if(!response.data) {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Problem accessing back-end</div>});
+            } else {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>});
+            }
         });
 
         // grab list of files and build our table
@@ -74,7 +78,11 @@ class App extends Component {
             // refresh the files table
             this.setFilesTable();
         }).catch(response => {
-            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.response.data.message}</div>})
+            if(!response.data) {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Problem accessing back-end</div>});
+            } else {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>});
+            }
         });
     }
 
@@ -83,7 +91,11 @@ class App extends Component {
         axios.get(this.state.apiUrl + '/getUrl?id=' + id).then(response => {
             window.open(response.data.url, '_blank', 'noopener,noreferrer')
         }).catch(response => {
-            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.response.data.message}</div>})
+            if(!response.data) {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Problem accessing back-end</div>});
+            } else {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>});
+            }
         });
     }
   
@@ -108,6 +120,12 @@ class App extends Component {
   
     // On file upload (click the upload button)
     onSubmit = event => {
+        // Was the fileTypeInfo state populated?
+        if(!this.state.fileTypeInfo[this.state.fileTypeSelectOptionsValue]) {
+            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Missing file type info</div>});
+            return;
+        }
+
         // was a file selected?
         if(!this.state.selectedFile.name) {
             this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Please select a file to upload</div>});
@@ -136,14 +154,18 @@ class App extends Component {
             this.state.description
         );
 
-	    // Make the request to the backend api
+        // Make the request to the backend api
         axios.post(this.state.apiUrl + '/uploadFile', formData).then(response => {
             this.setState({ statusElement: <div id='Status' className='alert alert-success'>{response.data.message}</div>});
 
             // refresh the files table
             this.setFilesTable();
         }).catch(response => {
-            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.response.data.message}</div>});
+            if(!response.response) {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Problem accessing back-end</div>});
+            } else {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.response.data.message}</div>});
+            }
         });
     };
 
@@ -198,7 +220,11 @@ class App extends Component {
 
             this.setState({ fileTable: fileTable });
         }).catch(response => {
-            this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>})
+            if(!response.data) {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>Problem accessing back-end</div>});
+            } else {
+                this.setState({ statusElement: <div id='Status' className='alert alert-danger'>{response.data.message}</div>});
+            }
         });
     }
 
