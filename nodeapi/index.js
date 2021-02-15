@@ -109,6 +109,20 @@ app.get('/', async function (request, reply) {
     return;
 })
 
+// health check route
+app.get('/health', async function (request, reply) {
+    // always return JSON
+    reply.header('Content-Type', 'application/json; charset=utf-8');
+
+    if (mongoose.connection.readyState === 1) {
+        reply.code(200).send('{ "data": "Database connection is healthy" }');
+        return;
+    } else {
+        reply.code(503).send('{ "data": "Database connection is not healthy" }');
+        return;
+    }
+})
+
 // get a single file's info from the db
 // requires an id
 app.get('/getFile', async function (request, reply) {
